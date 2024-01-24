@@ -35,6 +35,8 @@ const GlobalStyle = createGlobalStyle`
 
       overflow-y: auto;
       overflow-x: hidden;
+
+      transition: background-color 1s;
     }
 
     #root {
