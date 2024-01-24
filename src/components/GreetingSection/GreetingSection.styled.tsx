@@ -1,5 +1,18 @@
 import styled, { css } from "styled-components";
 
+const gradientBackground = css`
+  background: linear-gradient(
+    45deg, 
+    ${({ theme }) => theme.color.primary} 0%,
+    ${({ theme }) => theme.color.secondary} 33%,
+    ${({ theme }) => theme.color.primary} 66%,
+    ${({ theme }) => theme.color.secondary} 100%
+  );
+
+  animation: placeholderSlide 5s linear infinite;
+  background-size: 400% 400%;
+`;
+
 export const Wrapper = styled.section`
   display: flex;
   width: fit-content;
@@ -9,21 +22,17 @@ export const Wrapper = styled.section`
 `;
 
 export const Heading = styled.h1`
-  ${({ theme }) => css`
-    font-size: 96px;
-    font-style: normal;
-    font-weight: 500;
-    line-height: normal;
+  font-size: 96px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: normal;
 
-    background: linear-gradient(
-      90deg, 
-      ${theme.color.primary}
-      0%,
-      ${theme.color.secondary} 
-      100%);
-      
-    background-clip: text;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-  `};
+  ${gradientBackground}
+
+  animation: placeholderSlide 5s linear infinite;
+  background-size: 400% 400%;
+    
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 `;

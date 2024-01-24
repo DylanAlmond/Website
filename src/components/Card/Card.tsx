@@ -6,7 +6,7 @@ type Props = {
   post?: Post
 };
 
-function prettyUrl(value:string) {
+function prettyUrl(value: string) {
   try {
     return new URL(value).hostname
   } catch (error) {
@@ -15,36 +15,31 @@ function prettyUrl(value:string) {
 }
 
 const Card = ({ post }: Props) => {
+  if (!post) {
+    return;
+  }
+
   return (
     <Wrapper>
-      {!post ? (
-        <>
-          <Img src={placeholder} />
-          <Title>
-            Loading...
-          </Title>
-        </>
-      ) : (
-        <>
-          <Img 
-            loading="lazy" 
-            src={post.projectFields.thumbnail?.node.sourceUrl || placeholder} 
-            alt='Post Thumbnail'
-          />
+      <Img
+        loading="lazy"
+        src={post.projectFields.thumbnail?.node.sourceUrl || placeholder}
+        alt='Post Thumbnail'
+      />
 
-          <Title>
-            {post.title || 'Post Title'}
-          </Title>
+      <Title>
+        {post.title || 'Post Title'}
+      </Title>
 
-          <Description>
-            {post.projectFields.description || 'Post Description'}
-          </Description>
+      <Description>
+        {post.projectFields.description || 'Post Description'}
+      </Description>
 
-          <FeaturedLink href={post.projectFields.featuredLink || 'https://dylanalmond.net'}>
-            {prettyUrl(post.projectFields.featuredLink) || 'dylanalmond.net'}
-          </FeaturedLink>
-        </>
-      )}
+      {post.projectFields.featuredLink ? (
+        <FeaturedLink href={post.projectFields.featuredLink}>
+          {prettyUrl(post.projectFields.featuredLink)}
+        </FeaturedLink>
+      ) : null}
     </Wrapper>
   )
 }

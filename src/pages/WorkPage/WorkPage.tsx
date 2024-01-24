@@ -2,10 +2,11 @@ import { CardGrid, Wrapper } from './WorkPage.styles'
 import Card from '../../components/Card/Card'
 import { gql, useQuery } from '@apollo/client';
 import { Post } from '../../common/types';
+import Placeholder from '../../components/Placeholder/Placeholder';
 
 const GET_ALL_POSTS = gql`
   query getAllProjects {
-    projects(first: 12) {
+    projects(first: 9) {
       nodes {
         id
         title
@@ -14,7 +15,7 @@ const GET_ALL_POSTS = gql`
           featuredLink
           thumbnail {
             node {
-              sourceUrl
+              sourceUrl(size: MEDIUM)
             }
           }
         }
@@ -30,7 +31,11 @@ const WorkPage = () => {
     // Return a loading state or skeleton screen
     return (
       <Wrapper>
-        Loading...
+        <CardGrid>
+          {[...Array(9)].map((_, i) =>
+            <Placeholder key={i} />
+          )}
+        </CardGrid>
       </Wrapper>
     );
   }

@@ -4,9 +4,9 @@ export const SocialsWrapper = styled.div`
   ${({ theme }) => css`
     display: flex;
     align-items: center;
-    gap: 16px;
+    gap: 20px;
 
-    font-size: ${theme.fontSize.lg};
+    font-size: 20px;
     a {
       color: ${theme.color.onSecondary};
     }

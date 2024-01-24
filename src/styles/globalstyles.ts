@@ -67,6 +67,16 @@ const GlobalStyle = createGlobalStyle`
     ul, ol {
       padding-left: 1rem;
     }
+
+    /* Animations */
+    @keyframes placeholderSlide {
+      0% {
+          background-position: 100% 0%
+      }
+      100% {
+          background-position: 15% 100%
+      }
+    }
   `};
 `;
 
