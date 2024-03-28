@@ -36,7 +36,7 @@ const ContentSection = () => {
 
       <Routes>
         <Route path="/" element={<WorkPage />} />
-        <Route path="/:slug" element={<WpPage />} />
+        <Route path="/:slug*" element={<WpPage />} />
       </Routes>
     </Wrapper>
   )
