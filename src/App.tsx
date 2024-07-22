@@ -1,27 +1,27 @@
-import { ApolloProvider } from '@apollo/client'
-import client from './lib/apollo'
-import { BrowserRouter } from 'react-router-dom'
-import { ThemeProvider } from 'styled-components'
-import { dark, light } from './styles/theme'
-import { Main } from './App.styled'
-import GlobalStyle from './styles/globalstyles'
+import { ApolloProvider } from '@apollo/client';
+import Contact from './components/Contact';
+import Experience from './components/Experience';
+import Footer from './components/Footer';
+import Header from './components/Header';
+import Skills from './components/Skills';
+import Welcome from './components/Welcome';
+import { ActiveSectionProvider } from './context/activeSectionContext';
+import client from './lib/apollo';
+import { useState, useEffect } from 'react';
+import ThemeToggle from './components/ThemeToggle';
 
-import Header from './components/Header/Header'
-import Footer from './components/Footer/Footer'
-import GreetingSection from './components/GreetingSection/GreetingSection'
-import ContentSection from './components/ContentSection/ContentSection'
-import { useEffect, useState } from 'react'
-
-function App() {
-  const [mode, setMode] = useState('light');
-
-  const theme = mode === 'light' ? light : dark;
+const App = () => {
+  const [mode, setMode] = useState<'light' | 'dark'>('light');
 
   useEffect(() => {
     if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-      setMode('dark')
+      setMode('dark');
     }
   }, []);
+
+  useEffect(() => {
+    document.body.dataset.mode = mode;
+  }, [mode]);
 
   const toggleMode = () => {
     setMode((m) => (m === 'light' ? 'dark' : 'light'));
@@ -29,23 +29,22 @@ function App() {
 
   return (
     <ApolloProvider client={client}>
-      <BrowserRouter>
-        <ThemeProvider theme={theme}>
-          <GlobalStyle />
-          <Header
-            toggleSwitch={toggleMode}
-            mode={mode}
-          />
+      <ActiveSectionProvider>
+        <main className="min-h-dvh w-full overflow-x-hidden bg-background text-onPrimary transition-colors dark:bg-background-dark dark:text-onPrimary-dark">
+          <div className="mx-auto flex h-full max-w-screen-lg flex-col items-center scroll-smooth px-8">
+            <Header />
+            <Welcome />
+            <Skills />
+            <Experience />
+            <Contact />
+            <Footer />
 
-          <Main>
-            <GreetingSection />
-            <ContentSection />
-          </Main>
-          <Footer />
-        </ThemeProvider>
-      </BrowserRouter>
+            <ThemeToggle onClick={toggleMode} mode={mode} />
+          </div>
+        </main>
+      </ActiveSectionProvider>
     </ApolloProvider>
-  )
-}
+  );
+};
 
-export default App
+export default App;

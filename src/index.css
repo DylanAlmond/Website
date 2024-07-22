@@ -1,0 +1,32 @@
+@import '@fontsource/roboto';
+@import '@fontsource/roboto/300.css';
+@import '@fontsource/roboto/400.css';
+@import '@fontsource/roboto/500.css';
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+button,
+a {
+  @apply cursor-pointer;
+  @apply transition-all duration-300;
+  @apply text-onSecondary dark:text-onSecondary-dark;
+  @apply hover:text-onPrimary dark:hover:text-onPrimary-dark;
+  @apply text-xl lg:text-base;
+
+  @apply flex items-center;
+
+  &.active {
+    @apply opacity-100;
+    @apply text-primary dark:text-primary-dark;
+  }
+}
+
+ul,
+ol {
+  @apply ml-4;
+}
+
+ul {
+  @apply list-disc;
+}
